@@ -4,36 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Calculator</title>
 </head>
 <body>
-    <form class="calcForm" name="calculator">
-        <input type="text" class="calcDisplay" id="display" />
-        <div class="calcRow">
-            <input type="button" class="calcButton" value="7" id="seven"/>
-            <input type="button" class="calcButton" value="8" id="eight"/>
-            <input type="button" class="calcButton" value="9" id="nine" />
-            <input type="button" class="calcButton" value="+" id="add" />
-            <input type="button" class="calcButton" value="/" id="divide" />
-        </div>
-        <div class="calcRow">
-            <input type="button" class="calcButton" value="4" id="four"  />
-            <input type="button" class="calcButton" value="5" id="five" />
-            <input type="button" class="calcButton" value="6" id="six" />
-            <input type="button" class="calcButton" value="-" id="subtract"/>
-        </div>
-        <div class="calcRow">
-            <input type="button" class="calcButton" value="1" id="one"/>
-            <input type="button" class="calcButton" value="2"  id="two"/>
-            <input type="button" class="calcButton" value="3" id="three" />
-            <input type="button" class="calcButton" value="x" id="multiply" />
-        </div>
-        <div class="calcRow">
-            <input type="button" class="calcButton" value="0" id="zero" />
-            <input type="button" class="calcButton" value="." id="decimal" />
-            <input type="button" class="calcButton" value="C" id="clear" />
-            <input type="button" class="calcButton" value="=" id="equals"  />
-        </div>
-    </form>
+        <div class="calculator">
+
+                <input type="text" class="calculator-screen" value="0" id="display" disabled />
+                
+                <div class="calculator-keys">
+                  
+                  <button type="button" class="operator" value="+" id="add">+</button>
+                  <button type="button" class="operator" value="-" id="subtract">-</button>
+                  <button type="button" class="operator" value="*" id="multiply">&times;</button>
+                  <button type="button" class="operator" value="/"  id="divide">&divide;</button>
+              
+                  <button type="button" value="7" id="seven">7</button>
+                  <button type="button" value="8" id="eight">8</button>
+                  <button type="button" value="9"  id="nine">9</button>
+              
+              
+                  <button type="button" value="4" id="four">4</button>
+                  <button type="button" value="5"  id="five">5</button>
+                  <button type="button" value="6" id="six" >6</button>
+              
+              
+                  <button type="button" value="1" id="one">1</button>
+                  <button type="button" value="2" id="two">2</button>
+                  <button type="button" value="3" id="three">3</button>
+              
+              
+                  <button type="button" value="0" id="zero" >0</button>
+                  <button type="button" class="decimal function" value="."  id="decimal">.</button>
+                  <button type="button" class="all-clear function" value="all-clear">AC</button>
+              
+                  <button type="button" class="equal-sign operator" value="=" id="equals">=</button>
+              <script type="text/javascript" src="../Js/calc.js"></script>
+                </div>
+              </div>
+            
 </body>
 </html>
