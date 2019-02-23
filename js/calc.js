@@ -28,8 +28,6 @@ const calculator = {
     } else {
       calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
     }
-  
-    console.log(calculator);
   }
 
   function updateDisplay() {
@@ -136,7 +134,16 @@ function inputDecimal(dot) {
       if (calculator.displayValue === '0') {
         return;
       }
-      var value = calculator.displayValue;
-      calculator.displayValue = value.substr(0, value.length - 1);
+
+      if (calculator.displayValue.length == '1') {
+        calculator.displayValue = calculator.displayValue.substr(0, calculator.displayValue.length - 1);
+        calculator.displayValue = '0';
+        return;
+      }
+    else {
+      calculator.displayValue = calculator.displayValue.substr(0, calculator.displayValue.length - 1);
+    return;
+    }
+     
     }
   

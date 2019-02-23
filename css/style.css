@@ -66,8 +66,7 @@ html {
     background-color: #2e86c0;
     border-color: #337cac;
     color: #fff;
-    height: 100%;
-    grid-area: 2 / 4 / 6 / 5;
+   
   }
   
   .equal-sign:hover {
