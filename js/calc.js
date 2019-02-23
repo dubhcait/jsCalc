@@ -9,11 +9,13 @@ const calculator = {
     '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
   
     '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
+
+    '%': (firstOperand, secondOperand) => firstOperand % secondOperand,
   
     '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
   
     '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
-  
+
     '=': (firstOperand, secondOperand) => secondOperand
   };
 
@@ -95,7 +97,6 @@ function inputDecimal(dot) {
   
     if (operator && calculator.waitingForSecondOperand)  {
       calculator.operator = nextOperator;
-      console.log(calculator);
       return;
     }
   
@@ -111,7 +112,7 @@ function inputDecimal(dot) {
   
     calculator.waitingForSecondOperand = true;
     calculator.operator = nextOperator;
-    console.log(calculator);
+    
   }
 
   function resetCalculator() {
@@ -119,15 +120,22 @@ function inputDecimal(dot) {
     calculator.firstOperand = null;
     calculator.waitingForSecondOperand = false;
     calculator.operator = null;
-    console.log(calculator);
+   
   }
 
 
   function negPos() {
+    if (!calculator.displayValue == 0) {
     calculator.displayValue *= -1;
     }
+  
+  return;
+}
 
     function del() {
+      if (calculator.displayValue === '0') {
+        return;
+      }
       var value = calculator.displayValue;
       calculator.displayValue = value.substr(0, value.length - 1);
     }
