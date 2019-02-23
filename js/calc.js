@@ -51,6 +51,19 @@ keys.addEventListener('click', (event) => {
     return;
   }
 
+  if (target.classList.contains("n-p")) {
+   negPos();
+    updateDisplay();
+    return;
+    }
+
+    if (target.classList.contains("delete")){
+      del();
+      updateDisplay();
+      return;
+    }
+  
+
   if (target.classList.contains('decimal')) {
     inputDecimal(target.value);
     updateDisplay();
@@ -58,7 +71,8 @@ keys.addEventListener('click', (event) => {
   }
 
   if (target.classList.contains('all-clear')) {
-    console.log('clear', target.value);
+    resetCalculator();
+    updateDisplay();
     return;
   }
 
@@ -67,20 +81,29 @@ keys.addEventListener('click', (event) => {
 });
 
 function inputDecimal(dot) {
-    // If the `displayValue` does not contain a decimal point
-    if (!calculator.displayValue.includes(dot)) {
-      // Append the decimal point
-      calculator.displayValue += dot;
-    }
+  if (calculator.waitingForSecondOperand === true) return;
+  // If the `displayValue` does not contain a decimal point
+  if (!calculator.displayValue.includes(dot)) {
+    // Append the decimal point
+    calculator.displayValue += dot;
   }
+}
+
   function handleOperator(nextOperator) {
     const { firstOperand, displayValue, operator } = calculator
     const inputValue = parseFloat(displayValue);
   
+    if (operator && calculator.waitingForSecondOperand)  {
+      calculator.operator = nextOperator;
+      console.log(calculator);
+      return;
+    }
+  
     if (firstOperand == null) {
       calculator.firstOperand = inputValue;
     } else if (operator) {
-      const result = performCalculation[operator](firstOperand, inputValue);
+      const currentValue = firstOperand || 0;
+      const result = performCalculation[operator](currentValue, inputValue);
   
       calculator.displayValue = String(result);
       calculator.firstOperand = result;
@@ -91,4 +114,21 @@ function inputDecimal(dot) {
     console.log(calculator);
   }
 
+  function resetCalculator() {
+    calculator.displayValue = '0';
+    calculator.firstOperand = null;
+    calculator.waitingForSecondOperand = false;
+    calculator.operator = null;
+    console.log(calculator);
+  }
 
+
+  function negPos() {
+    calculator.displayValue *= -1;
+    }
+
+    function del() {
+      var value = calculator.displayValue;
+      calculator.displayValue = value.substr(0, value.length - 1);
+    }
+  
