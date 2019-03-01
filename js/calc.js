@@ -5,39 +5,14 @@ const calculator = {
     operator: null,
   };
 
-  const performCalculation = {
-    '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
-  
-    '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
-
-    '%': (firstOperand, secondOperand) => firstOperand % secondOperand,
-  
-    '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
-  
-    '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
-
-    '=': (firstOperand, secondOperand) => secondOperand
-  };
-
-  function inputDigit(digit) {
-    const { displayValue, waitingForSecondOperand } = calculator;
-  
-    if (waitingForSecondOperand === true) {
-      calculator.displayValue = digit;
-      calculator.waitingForSecondOperand = false;
-    } else {
-      calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
-    }
-  }
 
   function updateDisplay() {
     const display = document.querySelector('.calculator-screen');
+    font();
     display.value = calculator.displayValue;
   }
 
-  updateDisplay();
   
- 
   const keys = document.querySelector('.calculator-keys');
 keys.addEventListener('click', (event) => {
   const { target } = event;
@@ -80,11 +55,25 @@ keys.addEventListener('click', (event) => {
   updateDisplay();
 });
 
+
+function inputDigit(digit) {
+  const { displayValue, waitingForSecondOperand } = calculator;
+
+  if (waitingForSecondOperand === true) {
+    // this is before the first operator is inputed
+    calculator.displayValue = digit;
+    calculator.waitingForSecondOperand = false;
+  } else {
+    // displays 0 before the second number is inputed, the first digit is added to 0 and displayed
+    calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+  }
+}
+
 function inputDecimal(dot) {
+  // prevents decimal being pressed inbetween number enteries
   if (calculator.waitingForSecondOperand === true) return;
   // If the `displayValue` does not contain a decimal point
   if (!calculator.displayValue.includes(dot)) {
-    // Append the decimal point
     calculator.displayValue += dot;
   }
 }
@@ -112,6 +101,22 @@ function inputDecimal(dot) {
     calculator.operator = nextOperator;
     
   }
+
+  // arrow functions, shorthand for functions
+  const performCalculation = {
+    '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
+  
+    '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
+
+    '%': (firstOperand, secondOperand) => firstOperand % secondOperand,
+  
+    '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
+  
+    '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
+
+    '=': (firstOperand, secondOperand) => secondOperand
+  };
+
 
   function resetCalculator() {
     calculator.displayValue = '0';
@@ -147,3 +152,18 @@ function inputDecimal(dot) {
      
     }
   
+  function font() {
+
+    if (calculator.displayValue.length < 10) {
+      document.getElementById("display").style.fontSize = "5rem";
+      return;
+    }
+
+    else if (calculator.displayValue.length < 15) {
+      document.getElementById("display").style.fontSize = "4rem";
+    }
+
+    else {
+      document.getElementById("display").style.fontSize = "3rem";
+    }
+  }
